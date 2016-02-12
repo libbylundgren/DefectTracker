@@ -1,3 +1,5 @@
+//Ashley Risius
+
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -24,7 +26,7 @@ public class AddUser extends JPanel {
 	JButton back = new JButton("Back to Main");
 	JButton addUser = new JButton("Add User");
 
-	ListUsersDAO defectTracker = new ListUsersDAO;
+	ListUsersDAO defectTracker = new ListUsersDAO();
 
 
 	public AddUser() {

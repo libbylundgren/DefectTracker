@@ -1,3 +1,5 @@
+//Heather Bowling
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -9,7 +11,8 @@ import java.util.logging.Logger;
 
 public class ListUsersDAO {
 
-	ArrayList<ListUsers> arrayList = new ArrayList<ListUsers>();
+	//LL changed ListUsers to UserInfo 
+	ArrayList<UserInfo> arrayList = new ArrayList<UserInfo>();
 	Connection con = null;
 	Statement st = null;
 	ResultSet rs = null;
@@ -29,7 +32,8 @@ public class ListUsersDAO {
 					String tempRole = rs.getString(4);
 					String tempEmail = rs.getString(5);
 					
-					ListUsers e = new ListUsers(tempUserId, tempFirstName, tempLastName, tempRole, tempEmail);
+					//LL changed ListUsers to UserInfo 
+					UserInfo e = new UserInfo(tempUserId, tempFirstName, tempLastName, tempRole, tempEmail);
 					arrayList.add(e);
 				}
 				if (rs!= null) {
@@ -59,7 +63,7 @@ public class ListUsersDAO {
 		String str = "";
 
 		for (int i = 0; i < arrayList.size(); i++) {
-			if (arrayList.get(i).getUserId().equals(s)) {
+			if (arrayList.get(i).getUserID().equals(s)) {
 				str += arrayList.get(i).getFirstName();
 				str += arrayList.get(i).getLastName();
 				str += arrayList.get(i).getRole();
@@ -93,11 +97,13 @@ public class ListUsersDAO {
 		}
 		
 	}*/
-	public void insertNewUser(ListUsers i) {
+	
+	//LL changed ListUsers to UserInfo 
+	public void insertNewUser(UserInfo i) {
 		makeConnection();
 
 		try {
-			String q = "insert into user (user_id, first_name, last_name, role, email) values " + " ('" + i.getUserId()
+			String q = "insert into user (user_id, first_name, last_name, role, email) values " + " ('" + i.getUserID()
 					+ "', '" + i.getFirstName() + "', '" + i.getLastName() + "', '" + i.getRole() + "', '" + i.getEmail()
 					+ "');";
 
@@ -117,11 +123,12 @@ public class ListUsersDAO {
 
 	}
 
-	public void deleteUser(ListUsers i) {
+	//LL changed ListUsers to UserInfo 
+	public void deleteUser(UserInfo i) {
 		makeConnection();
 
 		try {
-			String q = "delete from user where user_id = '" + i.getUserId() + "' and first_name = '" + i.getFirstName() 
+			String q = "delete from user where user_id = '" + i.getUserID() + "' and first_name = '" + i.getFirstName() 
 					+ "' and last_name = '" + i.getLastName() + "' and role = '" + i.getRole() + "' and email = '" + i.getEmail()  
 					+ "' limit 1";
 
