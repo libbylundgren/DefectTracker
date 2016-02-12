@@ -1,3 +1,5 @@
+//Ashley Risius
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -12,7 +14,6 @@ public class MasterDefectTracker {
 		master.setSize(400, 250);
 		master.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		master.setVisible(true);
-		//libby test
 
 	}
 

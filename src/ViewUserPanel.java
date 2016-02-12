@@ -13,23 +13,23 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-//import ViewDefectsPanel.ButtonListener; - Do I need this line? LL
 
-public class ViewDefectsPanel extends JPanel {
-	Container c = getRootPane();
-	ListDefectsDAO dtDAO = new ListDefectsDAO();
-	JLabel title = new JLabel("VIEW DEFECT TRACKER");
+public class ViewUserPanel extends JPanel{
 	
-	ArrayList<DefectInfo> listDefect = new ArrayList<DefectInfo>(dtDAO.arrayList);
-	JList list = new JList(listDefect.toArray());
+	Container c = getRootPane();
+	ListUsersDAO userDAO = new ListUsersDAO();
+	JLabel title = new JLabel("VIEW USER TABLE");
+	
+	ArrayList<UserInfo> listUser = new ArrayList<UserInfo>(userDAO.arrayList);
+	JList list = new JList(listUser.toArray());
 	
 	JScrollPane scroll = new JScrollPane(list);
 	JButton back = new JButton("Back");
-	JButton delete = new JButton("Delete defect");
-	//JButton add = new JButton("Add defect");
-	//JButton update = new JButton("Update defect");
+	JButton delete = new JButton("Delete User");
+	//JButton add = new JButton("Add User");
+	//JButton update = new JButton("Update User");
 	
-	public ViewDefectsPanel(){
+	public ViewUserPanel(){
 		title.setFont(new Font("Serif", Font.PLAIN, 16));
 		
 		setLayout(new BorderLayout());
@@ -68,23 +68,22 @@ public class ViewDefectsPanel extends JPanel {
 		
 		if(e.getSource()==delete){
 			
-			int defect = list.getSelectedIndex();
+			int user = list.getSelectedIndex();
 			
-			if(defect != -1){
-				//LL changed ListItem to DefectInfo / and deleteItem to deleteDefect
-				DefectInfo tempDefect = listDefect.get(defect);
-				dtDAO.deleteDefect(tempDefect);
+			if(user != -1){
+				//LL changed ListItem to UserInfo / and listModel to listUser
+				UserInfo tempUser = listUser.get(user);
+				userDAO.deleteUser(tempUser);
 				
-				//LL changed listModel to listDefect
-				listDefect.remove(defect);
-				list.setListData(listDefect.toArray());
+				listUser.remove(user);
+				list.setListData(listUser.toArray());
 				
 				scroll.revalidate();
 				scroll.repaint();
 			}
 			
 			System.out.println("Remove selected object");
+			}
 		}
-		}
-	}
+	}	
 }

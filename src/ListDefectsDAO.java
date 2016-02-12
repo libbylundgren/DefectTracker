@@ -1,3 +1,5 @@
+//Heather Bowling
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -9,7 +11,8 @@ import java.util.logging.Logger;
 
 public class ListDefectsDAO {
 
-	ArrayList<ListDefects> arrayList = new ArrayList<ListDefects>();
+	//LL changed <DefectInfo> from <ListDefects>
+	ArrayList<DefectInfo> arrayList = new ArrayList<DefectInfo>();
 	Connection con = null;
 	Statement st = null;
 	ResultSet rs = null;
@@ -35,7 +38,8 @@ public class ListDefectsDAO {
 						String tempComments = rs.getString(10);
 //need to add comments from history table.  Connect by defect_id				
 						
-						ListDefects e = new ListDefects(tempDefectId, tempOpenDate, tempCloseDate, tempReporterId, tempDefectSummary
+						//LL changed <DefectInfo> from <ListDefects>
+						DefectInfo e = new DefectInfo(tempDefectId, tempOpenDate, tempCloseDate, tempReporterId, tempDefectSummary
 								        , tempDetailDescription, tempAssignee, tempStatus, tempPriority, tempComments);
 						arrayList.add(e);
 					}
@@ -66,13 +70,13 @@ public class ListDefectsDAO {
 		String str = "";
 
 		for (int i = 0; i < arrayList.size(); i++) {
-			if (arrayList.get(i).getDefectId().equals(s)) {
+			if (arrayList.get(i).getDefectID().equals(s)) {
 				str += arrayList.get(i).getOpenDate();
 				str += arrayList.get(i).getCloseDate();
-				str += arrayList.get(i).getReporterId();
-				str += arrayList.get(i).getDefectSummary();
-				str += arrayList.get(i).getDetailDescription();
-				str += arrayList.get(i).getAssignee();
+				str += arrayList.get(i).getReporterID();
+				str += arrayList.get(i).getSummary();
+				str += arrayList.get(i).getDescription();
+				str += arrayList.get(i).getAssigneeID();
 				str += arrayList.get(i).getStatus();
 				str += arrayList.get(i).getPriority();
 				str += arrayList.get(i).getComments();
@@ -107,13 +111,15 @@ public class ListDefectsDAO {
 	 * 
 	 * }
 	 */
-	public void insertNewDefect(ListDefects i) {
+	
+	//LL changed <DefectInfo> from <ListDefects>
+	public void insertNewDefect(DefectInfo i) {
 		makeConnection();
 
 		try {
 			String q = "insert into defect (defect_id, open_date, close_date, reporter_id, defect_summary, detail_description, assignee, status, priority, comments) values " 
-					+ " ('" + i.getDefectId() + "', '" + i.getOpenDate() + "', '" + i.getCloseDate() + "', '" + i.getReporterId() + "', '"
-					+ i.getDefectSummary() + "', '" + i.getDetailDescription() + "', '" + i.getAssignee() + "', '" + i.getStatus() + "', '" 
+					+ " ('" + i.getDefectID() + "', '" + i.getOpenDate() + "', '" + i.getCloseDate() + "', '" + i.getReporterID() + "', '"
+					+ i.getSummary() + "', '" + i.getDescription() + "', '" + i.getAssigneeID() + "', '" + i.getStatus() + "', '" 
 					+ i.getPriority() + "', '" + i.getComments() + "');";
 
 			st = con.createStatement();
@@ -132,13 +138,14 @@ public class ListDefectsDAO {
 
 	}
 
-	public void deleteDefect(ListDefects i) {
+	//LL changed ListDefects to DefectInfo 
+	public void deleteDefect(DefectInfo i) {
 		makeConnection();
 
 		try {
-			String q = "delete from defect where defect_id = '" + i.getDefectId() + "' and open_date = '" + i.getOpenDate()
-					+ "' and close_date = '" + i.getCloseDate() + "' and reporter_id = '" + i.getReporterId() + "' and defect_summary = '"
-					+ i.getDefectSummary() + "' and detail_description = '" + i.getDetailDescription() + "' and assignee = '" + i.getAssignee()
+			String q = "delete from defect where defect_id = '" + i.getDefectID() + "' and open_date = '" + i.getOpenDate()
+					+ "' and close_date = '" + i.getCloseDate() + "' and reporter_id = '" + i.getReporterID() + "' and defect_summary = '"
+					+ i.getSummary() + "' and detail_description = '" + i.getDescription() + "' and assignee = '" + i.getAssigneeID()
 					+ "' and status = '" + i.getStatus() + "' and priority = '" + i.getPriority() + "' and comments = '" + i.getComments()
 					+ "' limit 1";
 
