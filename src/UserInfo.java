@@ -17,6 +17,11 @@ public class UserInfo {
 		role = r;
 	}
 
+//Heather Added this.  Thought it was needed but may not be.
+	public UserInfo(String uID){
+		userID = uID;
+	}
+	
 	public String getUserID() {
 		return userID;
 	}

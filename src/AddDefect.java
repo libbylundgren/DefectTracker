@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -31,7 +32,7 @@ public class AddDefect extends JPanel {
 	JButton submit = new JButton("Submit");
 	JButton back = new JButton("Back to Main");
 	JButton viewDefects = new JButton("View Defects");
-	DefectTrackerDAO defectTracker = new DefectTrackerDAO;
+	ListDefectsDAO defectTracker = new ListDefectsDAO();
 	
 	public AddDefect() {
 		
@@ -73,34 +74,33 @@ public class AddDefect extends JPanel {
 		
 	}
 	
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		
-		if (e.getSource() == submit) {
-			
-//need information here from the DefectInfo class
-			
-			System.out.println("Add new item to database");
+	class ButtonListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+
+			if (e.getSource() == submit) {
+
+				// need information here from the DefectInfo class
+
+				System.out.println("Add new item to database");
+			}
+
+			if (e.getSource() == viewDefects) {
+				removeAll();
+				JPanel newPanel = new SortDefects();
+				add(newPanel);
+				revalidate();
+				newPanel.repaint();
+			}
+
+			if (e.getSource() == back) {
+				removeAll();
+				JPanel newPanel = new MainPanel();
+				add(newPanel);
+				revalidate();
+				newPanel.repaint();
+			}
 		}
-		
-		if (e.getSource() == viewDefects){
-			removeAll();
-            JPanel newPanel=new SortDefects();
-            add(newPanel);
-            revalidate();
-            newPanel.repaint();
-		}
-	
-		
-		if(e.getSource() == back){
-			removeAll();
-            JPanel newPanel= new MainPanel();
-            add(newPanel);
-            revalidate();
-            newPanel.repaint();
-		}
+
 	}
-	
 }
-
-

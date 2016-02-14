@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -65,24 +66,25 @@ public class AddUser extends JPanel {
 
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
+	class ButtonListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
 
-		if (e.getSource() == addUser) {
+			if (e.getSource() == addUser) {
 
-			// need information here from the DefectInfo class
+				// need information here from the DefectInfo class
 
-			System.out.println("Add new user to database");
+				System.out.println("Add new user to database");
+			}
+
+			if (e.getSource() == back) {
+				removeAll();
+				JPanel newPanel = new MainPanel();
+				add(newPanel);
+				revalidate();
+				newPanel.repaint();
+			}
 		}
 
-
-		if (e.getSource() == back) {
-			removeAll();
-			JPanel newPanel = new MainPanel();
-			add(newPanel);
-			revalidate();
-			newPanel.repaint();
-		}
 	}
-
 }

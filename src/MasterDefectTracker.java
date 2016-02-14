@@ -3,18 +3,19 @@
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+
 public class MasterDefectTracker {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+
 		JFrame master = new JFrame();
-		JPanel mainPanel = new MainPanel();
+		JPanel mainPanel = new Login();
 		master.add(mainPanel);
-		
-		master.setSize(400, 250);
-		master.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		master.setTitle("Login to Defect Tracker System");
 		master.setVisible(true);
-
+		master.setSize(800, 800);
+//		master.setLayout(null);
+		master.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
-
 }
