@@ -22,7 +22,7 @@ public class ListUsersDAO {
 			makeConnection();
 			
 			try {
-				String q = "SELECT * FROM user";
+				String q = "SELECT * FROM user ";
 				st = con.createStatement();
 				rs = st.executeQuery(q);			
 				while (rs.next()){
@@ -52,6 +52,7 @@ public class ListUsersDAO {
 
 		}
 
+	
 	public String getCurrentList() {
 
 		String str = "";

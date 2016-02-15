@@ -13,8 +13,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
-import SortListPanel.ButtonAndStoreSelectorListener;
-
 public class SortDefects extends JPanel{
 
 	JLabel title = new JLabel("Sort Defects");
@@ -29,7 +27,7 @@ public class SortDefects extends JPanel{
 	JComboBox assignee = new JComboBox();
 	
 	JButton back = new JButton("Back to Main");
-	DefectTrackerDAO defectTracker = new DefectTrackerDAO;
+	ListDefectsDAO defectTracker = new ListDefectsDAO();
 	
 	public SortDefects(){
 		title.setFont(new Font("Serif", Font.PLAIN, 16));
@@ -65,9 +63,9 @@ public class SortDefects extends JPanel{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			
-			String s = //insert information for DAO here
+//			String s = //insert information for DAO here
 			
-			System.out.println("noted change");
+//			System.out.println("noted change");
 			
 			if(e.getSource() == back){
 				removeAll();
