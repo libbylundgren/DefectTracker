@@ -18,17 +18,24 @@ public class AddDefect extends JPanel {
 	
 	String[] statuses = {"Open", "In Progress", "Closed"};
 	String[] priorities = {"Low", "Medium", "High"};
-	
+	//not adding defectId as the table should add sequentially add this
+	//not adding close date since this is the open slot.
+	//not adding reportId as this should be whoever is logged in
 	JLabel title = new JLabel("Enter the defect information here: ");
-	JLabel defectSummaryLabel = new JLabel("Defect Summary: ");
-	JTextField defectSummary = new JTextField(100);
-	//JLabel openDate = new JLabel("Date Opened: ");
-	JComboBox userId = new JComboBox();
+	JLabel summaryLabel = new JLabel("Defect Summary: ");
+	JTextField summary = new JTextField(100);
+	//JLabel openDate = new JLabel("Date Opened: "); //do i need this or will table populate current date?
+	//JComboBox userId = new JComboBox(); //do i need this?  what's the different between this and reported/assignee?
 	JLabel descriptionLabel = new JLabel("Enter a description here: ");
 	JTextField description = new JTextField(100);
-	JComboBox status = new JComboBox(statuses);
 	JComboBox priority = new JComboBox(priorities);
-	JComboBox assignee = new JComboBox();
+	JComboBox status = new JComboBox(statuses);
+	JComboBox assigneeID = new JComboBox();
+	JLabel commentsLabel = new JLabel("Comments: ");
+	JTextField comments - new JTextField(5000);
+	
+
+
 	JButton submit = new JButton("Submit");
 	JButton back = new JButton("Back to Main");
 	JButton viewDefects = new JButton("View Defects");
@@ -50,14 +57,15 @@ public class AddDefect extends JPanel {
 		JPanel buttonLabels = new JPanel(new GridLayout(2,0));
 		JPanel textBoxes = new JPanel(new GridLayout(2,0));
 		
-		buttonLabels.add(defectSummaryLabel);
-		textBoxes.add(defectSummary);
+		buttonLabels.add(summaryLabel);
+		textBoxes.add(summary);
 		buttonLabels.add(descriptionLabel);
+		buttonLabels.add(commentsLabel);
 		textBoxes.add(description);
-		textBoxes.add(userId);
 		textBoxes.add(status);
 		textBoxes.add(priority);
-		textBoxes.add(assignee);
+		textBoxes.add(assigneeID);
+		textBoxes.add(comments);
 		
 		add(buttonLabels, BorderLayout.WEST);
 		add(textBoxes, BorderLayout.CENTER);
@@ -80,8 +88,23 @@ public class AddDefect extends JPanel {
 
 			if (e.getSource() == submit) {
 
-				// need information here from the DefectInfo class
+				 String tempSummary = summary.getText();
+				 String tempDescription = description.getText();
+				 String tempPriority = priority.getSelectedItem().toString();
+				 String tempStatus = status.getSelectedItem().toString();
+				 String tempAssigneeID = assigneeID.getSelectedItem().toString();
+				 String tempComments = comments.getText();
 
+				 //need to add some type of error handling if options are empty
+				 
+				DefectInfo d = new DefectInfo(tempSummary, tempDescription, tempPriority, tempStatus, tempAssigneeID, tempComments);
+				//I think this is messed up because i'm not passing the same number as in the constructor? 
+				ListDefectsDAO.insertNewDefect(d);
+					
+				summary.setText("");
+				description.setText("");
+				comments.setText("");
+					
 				System.out.println("Add new item to database");
 			}
 
