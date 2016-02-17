@@ -11,20 +11,29 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 public class SortDefects extends JPanel{
 
 	JLabel title = new JLabel("Sort Defects");
-	JLabel defectSummaryLabel = new JLabel("Defect Summary: ");
-	//JLabel openDate = new JLabel("Date Opened: ");
 	JComboBox defectId = new JComboBox();
 	JComboBox userId = new JComboBox();
-	String[] statuses = {"Open", "In Progress", "Closed"};
-	JComboBox status = new JComboBox(statuses);
+	JLabel summmaryLabel = new JLabel("Defect Summary: ");
+	JLabel descriptionLabel = new JLabel("Description: ");
 	String[] priorities = {"Low", "Medium", "High"};
 	JComboBox priority = new JComboBox(priorities);
-	JComboBox assignee = new JComboBox();
+
+	String[] statuses = {"Open", "In Progress", "Closed"};
+	JComboBox status = new JComboBox(statuses);
+
+	JLabel openDateLabel = new JLabel("Date Opened: ");
+	JLabel closeDateLabel = new JLabel("Date Closed: ");
+	JComboBox reporterID = new JComboBox(); //i need to get list from database
+	JComboBox assigneeID = new JComboBox(); //i need to get list from database
+	JLabel commnentsLabel = new JLabel("Defect Summary: ");
+	
+	JTextArea defectList = new JTextArea(5, 15);
 	
 	JButton back = new JButton("Back to Main");
 	ListDefectsDAO defectTracker = new ListDefectsDAO();
@@ -33,17 +42,26 @@ public class SortDefects extends JPanel{
 		title.setFont(new Font("Serif", Font.PLAIN, 16));
 		setMinimumSize(new Dimension(400,250));
 
-	    
-	    JScrollPane scroll = new JScrollPane();
+		defectList.append(ListDefectsDAO.getCurrentListFromDefect(defectId[0]));
+		defectList.setLineWrap(true);
+		defectList.setEditable(true);
+
+		defectList.setVisible(true);
+
+		JScrollPane scroll = new JScrollPane(defectList);
+	   
 	    scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		
         SortListener ss = new SortListener();
         defectId.addActionListener(ss);
         userId.addActionListener(ss);
-        status.addActionListener(ss);
         priority.addActionListener(ss);
-        assignee.addActionListener(ss);
+        status.addActionListener(ss);
+        openDateLabel.addActionListener(ss);
+       // need to figure out a way to add the other labels as part of sort??  like open/close dates
+        assigneeID.addActionListener(ss);
+        reporterID.addActionListener(ss);
         back.addActionListener(ss);
         
         setLayout(new BorderLayout());
@@ -53,7 +71,7 @@ public class SortDefects extends JPanel{
 		add(userId, BorderLayout.WEST);
 		add(status, BorderLayout.WEST);
 		add(priority, BorderLayout.WEST);
-		add(assignee, BorderLayout.WEST);
+		add(assigneeID, BorderLayout.WEST);
 		add(scroll, BorderLayout.CENTER);
 		add(back, BorderLayout.SOUTH);	
 		
@@ -63,7 +81,8 @@ public class SortDefects extends JPanel{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			
-//			String s = //insert information for DAO here
+			String d = defectId.getSelectedItem().toString();
+			defectList.setText(ListDefectsDAO.getCurrentListFromDefect(d));
 			
 //			System.out.println("noted change");
 			

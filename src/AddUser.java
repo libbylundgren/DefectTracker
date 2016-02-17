@@ -15,11 +15,13 @@ import javax.swing.JTextField;
 
 public class AddUser extends JPanel {
 
+	String[] roles = {"Manager", "Developer", "Business Partner", "Help Desk"};
 	JLabel title = new JLabel("Add New User");
 	JLabel firstNameLabel = new JLabel("First Name: ");
 	JTextField firstName = new JTextField(30);
 	JLabel lastNameLabel = new JLabel("Last Name: ");
 	JTextField lastName = new JTextField(30);
+	JComboBox role = new JComboBox(roles);
 	JLabel userIdLabel = new JLabel("User Id: ");
 	JTextField userId = new JTextField(30);
 	JLabel emailLabel = new JLabel("Email: ");
@@ -42,12 +44,13 @@ public class AddUser extends JPanel {
 		add(title, BorderLayout.NORTH);
 
 		JPanel buttonLabels = new JPanel(new GridLayout(4, 0));
-		JPanel textBoxes = new JPanel(new GridLayout(4, 0));
+		JPanel textBoxes = new JPanel(new GridLayout(5, 0));
 
 		buttonLabels.add(firstNameLabel);
 		textBoxes.add(firstName);
 		buttonLabels.add(lastNameLabel);
 		textBoxes.add(lastName);
+		textBoxes.add(role);
 		buttonLabels.add(userIdLabel);
 		textBoxes.add(userId);
 		buttonLabels.add(emailLabel);
@@ -71,9 +74,24 @@ public class AddUser extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 
 			if (e.getSource() == addUser) {
+				
+				String tempUserId = userId.getText();
 
-				// need information here from the DefectInfo class
+				String tempFirstName = firstName.getText();
+				String tempLastName = lastName.getText();
+				String tempEmail = email.getText();
+				String tempRole = role.getSelectedItem().toString(); 
 
+				 //need to add some type of error handling if options are empty
+				
+				UserInfo u = new UserInfo(tempUserId, tempFirstName, tempLastName, tempEmail, tempRole );
+				ListUsersDAO.insertNewUser(u);
+				
+				userId.setText("");
+				firstName.setText("");
+				lastName.setText("");
+				email.setText("");
+				
 				System.out.println("Add new user to database");
 			}
 
