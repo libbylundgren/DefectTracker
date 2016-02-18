@@ -23,7 +23,6 @@ public class SortDefects extends JPanel{
 	JLabel descriptionLabel = new JLabel("Description: ");
 	String[] priorities = {"Low", "Medium", "High"};
 	JComboBox priority = new JComboBox(priorities);
-
 	String[] statuses = {"Open", "In Progress", "Closed"};
 	JComboBox status = new JComboBox(statuses);
 
@@ -33,19 +32,17 @@ public class SortDefects extends JPanel{
 	JComboBox assigneeID = new JComboBox(); //i need to get list from database
 	JLabel commnentsLabel = new JLabel("Defect Summary: ");
 	
-	JTextArea defectList = new JTextArea(5, 15);
+	JTextArea defectList = new JTextArea(20, 45);
 	
 	JButton back = new JButton("Back to Main");
-	ListDefectsDAO defectTracker = new ListDefectsDAO();
+	ListDefectsDAO defectTrackerDAO = new ListDefectsDAO();
 	
 	public SortDefects(){
 		title.setFont(new Font("Serif", Font.PLAIN, 16));
 		setMinimumSize(new Dimension(400,250));
-
-		defectList.append(ListDefectsDAO.getCurrentListFromDefect(defectId[0]));
+		defectList.append(defectTrackerDAO.getCurrentListFromDefect(statuses[0]));
 		defectList.setLineWrap(true);
 		defectList.setEditable(true);
-
 		defectList.setVisible(true);
 
 		JScrollPane scroll = new JScrollPane(defectList);
@@ -58,8 +55,6 @@ public class SortDefects extends JPanel{
         userId.addActionListener(ss);
         priority.addActionListener(ss);
         status.addActionListener(ss);
-        openDateLabel.addActionListener(ss);
-       // need to figure out a way to add the other labels as part of sort??  like open/close dates
         assigneeID.addActionListener(ss);
         reporterID.addActionListener(ss);
         back.addActionListener(ss);
@@ -82,9 +77,9 @@ public class SortDefects extends JPanel{
 		public void actionPerformed(ActionEvent e) {
 			
 			String d = defectId.getSelectedItem().toString();
-			defectList.setText(ListDefectsDAO.getCurrentListFromDefect(d));
+			defectList.setText(defectTrackerDAO.getCurrentListFromDefect(d));
+			System.out.println("noted change");
 			
-//			System.out.println("noted change");
 			
 			if(e.getSource() == back){
 				removeAll();
