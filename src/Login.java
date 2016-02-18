@@ -1,5 +1,5 @@
 
-//Paula Bitner
+//Paula Bintner
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -31,54 +31,64 @@ public class Login extends JPanel {
 	JLabel title = new JLabel("Login to Defect Tracker System");
 	JLabel userIdLabel = new JLabel("User ID");
 	JTextField userId = new JTextField(25);
-	JButton btn1;
+	JButton submitBtn;
 
 	ListUsersDAO usersDAO = new ListUsersDAO();
 
 	public Login(){
 		
-		ButtonListener b = new ButtonListener();
+		
 		title=new JLabel("Login to Defect Tracker System");
 		title.setForeground(Color.blue);
 		title.setFont(new Font("Serif",Font.BOLD,20));
 		
 		userIdLabel=new JLabel("Enter User Id:");
-		userId=new JTextField();
-		btn1=new JButton("Submit");
+		userId=new JTextField(25);
+		submitBtn=new JButton("Submit");
+		
+		ButtonListener b = new ButtonListener();
+		submitBtn.addActionListener(b);
+		
 
 		title.setBounds(100,30,400,30);
 		userIdLabel.setBounds(80,70,200,30);
 		userId.setBounds(300,70,200,30);
-		btn1.setBounds(150,160,100,30);
+		submitBtn.setBounds(150,160,100,30);
 
 		add(title);
 		add(userIdLabel);
 		add(userId);
-		add(btn1);
+		add(submitBtn);
 	}
 
 	class ButtonListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if (e.getSource() == btn1) {
-				System.out.println("made it to showdata");
-				JPanel f1 = new JPanel();
-				JLabel l, l0;
+			if (e.getSource() == submitBtn) {
+			//	System.out.println("made it to showdata");
 				String str1 = userId.getText();
 				try {
-					usersDAO.getCurrentListFromUser(str1);
-					System.out.println("Validating User");
-//					if {
-					JFrame master = new JFrame();
-					JPanel mainPanel = new MainPanel(str1);
-					master.add(mainPanel);
-					master.setSize(800, 800);
-					master.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-					master.setVisible(true);
-//					} else {
-//						JOptionPane.showMessageDialog(null,
-//							"Incorrect user-Id ..Try Again with Valid User ID");
-//					}		
+			//		System.out.println("made it to try");
+					String str = usersDAO.getCurrentListFromUser(str1);
+			//		System.out.println("Validating User");
+					if (str.equals("")){
+						JOptionPane.showMessageDialog(null,
+								"Incorrect user-Id ..Try Again with Valid User ID");
+						JPanel mainPanel = new Login();
+						userId.setText("");}
+						else {
+							if (!str.equals(" "));{
+					//			System.out.println("returning from try");
+					//			System.out.println(str);
+								JFrame master = new JFrame();
+								JPanel mainPanel = new MainPanel();
+								master.add(mainPanel);
+								master.setSize(800, 800);
+								master.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+								master.setVisible(true);
+							}
+						}
+							
 				} catch (Exception ex) {
 					System.out.println(ex);
 				}
