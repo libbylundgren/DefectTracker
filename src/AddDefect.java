@@ -15,27 +15,25 @@ import javax.swing.JTextField;
 
 public class AddDefect extends JPanel {
 
-	
-	String[] statuses = {"Open", "In Progress", "Closed"};
-	String[] priorities = {"Low", "Medium", "High"};
 	//not adding defectId as the table should add sequentially add this
 	//not adding close date since this is the open slot.
 	//not adding reportId as this should be whoever is logged in
+	//JLabel openDate = new JLabel("Date Opened: "); //do i need this or will table populate current date?
+	//JComboBox userId = new JComboBox(); //do i need this?  what's the different between this and reported/assignee?
+	
+	String[] statuses = {"Open", "In Progress", "Closed"};
+	String[] priorities = {"Low", "Medium", "High"};
 	JLabel title = new JLabel("Enter the defect information here: ");
 	JLabel summaryLabel = new JLabel("Defect Summary: ");
 	JTextField summary = new JTextField(100);
-	//JLabel openDate = new JLabel("Date Opened: "); //do i need this or will table populate current date?
-	//JComboBox userId = new JComboBox(); //do i need this?  what's the different between this and reported/assignee?
 	JLabel descriptionLabel = new JLabel("Enter a description here: ");
 	JTextField description = new JTextField(100);
 	JComboBox priority = new JComboBox(priorities);
 	JComboBox status = new JComboBox(statuses);
 	JComboBox assigneeID = new JComboBox();
 	JLabel commentsLabel = new JLabel("Comments: ");
-	JTextField comments - new JTextField(5000);
+	JTextField comments = new JTextField(5000);
 	
-
-
 	JButton submit = new JButton("Submit");
 	JButton back = new JButton("Back to Main");
 	JButton viewDefects = new JButton("View Defects");
