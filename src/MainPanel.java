@@ -1,4 +1,4 @@
-//Paula Bitner
+//Paula Bintner
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -35,80 +35,21 @@ public class MainPanel extends JPanel{
 		
 	}
 	
-	public MainPanel(String n){
-        
-                
-        JLabel welcomeIn = new JLabel();
-
-        welcomeIn.setBounds(60, 50, 500, 500);
-
-        welcomeIn.setText("Welcome " + n + "!");
-
-        welcomeIn.setForeground(Color.red);
-
-        welcomeIn.setFont(new Font("Serif", Font.BOLD, 30)); 
-        
-        JLabel imIn = new JLabel();
-
-        imIn = new JLabel("You are successfully logged in to the Defect Tracker system.");
-
-        imIn.setForeground(Color.blue);
-
-        imIn.setFont(new Font("Serif", Font.BOLD, 30));
-        
-        imIn.setBounds(60, 100, 500, 500);
-        
-        JLabel actionIn = new JLabel();
-
-        actionIn = new JLabel("What function would you like to perform? ");
-
-        actionIn.setForeground(Color.black);
-
-        actionIn.setFont(new Font("Serif", Font.BOLD, 30));
-        
-        actionIn.setBounds(60, 150, 500, 500);
-
-        
-        add(welcomeIn);
-        add(imIn);
-        add(actionIn);
-        
-        JPanel buttonPanel = new JPanel();
-		
-		buttonPanel.add(view);
-		buttonPanel.add(add);
-		buttonPanel.add(sort);
-		
-		add(buttonPanel);
-      
-     
-		ButtonHandler handler = new ButtonHandler();
-		view.addActionListener(handler);
-		add.addActionListener(handler);
-		sort.addActionListener(handler);
-		
-	}
+	  
 	
 	class ButtonHandler implements ActionListener {
 		@Override
         public void actionPerformed(ActionEvent e) {
 			
-			JPanel welcomeIn = new JPanel();
-        	welcomeIn = (null);
-        	JPanel imIn = new JPanel();
-        	imIn = (null);
-        	JPanel actionIn = new JPanel();
-        	actionIn = (null);
-        	
-        	
-             /*   if (e.getSource() == view) {
+		        	
+                if (e.getSource() == view) {
  
                 	removeAll();
-                    JPanel newPanel=new ViewDefects();
+                    JPanel newPanel=new ViewDefectsPanel();
                     add(newPanel);
                     revalidate();
                 
-                } */
+                } 
                 if (e.getSource() == add) {
                 	removeAll();
                     JPanel newPanel=new AddDefect();
@@ -125,7 +66,7 @@ public class MainPanel extends JPanel{
             }
                 
         }
-
+	}
 }
 
-} 
+
