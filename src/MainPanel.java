@@ -36,8 +36,7 @@ public class MainPanel extends JPanel{
 	}
 	
 	public MainPanel(String n){
-        
-                
+             
         JLabel welcomeIn = new JLabel();
 
         welcomeIn.setBounds(60, 50, 500, 500);
@@ -68,7 +67,6 @@ public class MainPanel extends JPanel{
         
         actionIn.setBounds(60, 150, 500, 500);
 
-        
         add(welcomeIn);
         add(imIn);
         add(actionIn);
@@ -81,7 +79,6 @@ public class MainPanel extends JPanel{
 		
 		add(buttonPanel);
       
-     
 		ButtonHandler handler = new ButtonHandler();
 		view.addActionListener(handler);
 		add.addActionListener(handler);
@@ -100,20 +97,22 @@ public class MainPanel extends JPanel{
         	JPanel actionIn = new JPanel();
         	actionIn = (null);
         	
-        	
-             /*   if (e.getSource() == view) {
+        	//LL uncommented the view functionality, changed to ViewDefectsPanel();
+                if (e.getSource() == view) {
  
                 	removeAll();
-                    JPanel newPanel=new ViewDefects();
+                    JPanel newPanel=new ViewDefectsPanel();
                     add(newPanel);
                     revalidate();
+                    newPanel.repaint();
                 
-                } */
+                } 
                 if (e.getSource() == add) {
                 	removeAll();
                     JPanel newPanel=new AddDefect();
                     add(newPanel);
                     revalidate();
+                    newPanel.repaint();
                     
                 }
                 if (e.getSource() == sort) {
@@ -121,6 +120,7 @@ public class MainPanel extends JPanel{
                     JPanel newPanel=new SortDefects();
                     add(newPanel);
                     revalidate();
+                    newPanel.repaint();
                   
             }
                 

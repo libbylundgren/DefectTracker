@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -39,8 +40,7 @@ public class ListDefectsDAO {
 //need to add comments from history table.  Connect by defect_id				
 						
 						//LL changed <DefectInfo> from <ListDefects>
-						DefectInfo e = new DefectInfo(tempDefectId, tempOpenDate, tempCloseDate, tempReporterId, tempDefectSummary
-								        , tempDetailDescription, tempAssignee, tempStatus, tempPriority, tempComments);
+						DefectInfo e = new DefectInfo(tempDefectId, tempOpenDate, tempCloseDate, tempReporterId, tempDefectSummary, tempDetailDescription, tempAssignee, tempStatus, tempPriority, tempComments);
 						arrayList.add(e);
 					}
 					if (rs!= null) {
@@ -117,8 +117,8 @@ public class ListDefectsDAO {
 		makeConnection();
 
 		try {
-			String q = "insert into defect (defect_id, open_date, close_date, reporter_id, defect_summary, detail_description, assignee, status, priority, comments) values " 
-					+ " ('" + i.getDefectID() + "', '" + i.getOpenDate() + "', '" + i.getCloseDate() + "', '" + i.getReporterID() + "', '"
+			String q = "insert into defect (open_date, close_date, reporter_id, defect_summary, detail_description, assignee, status, priority, comments) values " 
+					+ " ('" + i.getOpenDate() + "', '" + i.getCloseDate() + "', '" + i.getReporterID() + "', '"
 					+ i.getSummary() + "', '" + i.getDescription() + "', '" + i.getAssigneeID() + "', '" + i.getStatus() + "', '" 
 					+ i.getPriority() + "', '" + i.getComments() + "');";
 
@@ -168,7 +168,7 @@ public class ListDefectsDAO {
 	public void makeConnection() {
 			String url = "jdbc:mysql://localhost:3306/defect_tracking";
 			String user = "root";
-			String password = "disney99";
+			String password = "Riggles0)";
 
 			try {
 
@@ -180,8 +180,6 @@ public class ListDefectsDAO {
 				Logger lgr = Logger.getLogger(ListDefectsDAO.class.getName());
 				lgr.log(Level.SEVERE, ex.getMessage(), ex);
 				System.out.println("Sql Exception");
-
 			}
-
 		}
 }
